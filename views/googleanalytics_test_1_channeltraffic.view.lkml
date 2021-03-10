@@ -1,6 +1,7 @@
 view: googleanalytics_test_1_channeltraffic {
   sql_table_name: "GOOGLE_ANALYTICS"."GOOGLEANALYTICS_TEST_1_CHANNELTRAFFIC"
     ;;
+label: "Channel Traffic"
 
   dimension: _fivetran_id {
     type: string

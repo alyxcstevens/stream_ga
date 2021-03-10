@@ -10,8 +10,12 @@ datagroup: google_analytics_default_datagroup {
 
 persist_with: google_analytics_default_datagroup
 
-explore: fivetran_audit {}
+# explore: fivetran_audit {}
 
-explore: googleanalytics_test_1_adwordscampaign {}
+explore: googleanalytics_test_1_adwordscampaign {
+  label: "Adwords Campaign"
+}
 
-explore: googleanalytics_test_1_channeltraffic {}
+explore: googleanalytics_test_1_channeltraffic {
+  label: "Channel Traffic"
+}

@@ -2,6 +2,8 @@ view: googleanalytics_test_1_adwordscampaign {
   sql_table_name: "GOOGLE_ANALYTICS"."GOOGLEANALYTICS_TEST_1_ADWORDSCAMPAIGN"
     ;;
 
+  label: "Adwords Campaign"
+
   dimension: _fivetran_id {
     type: string
     sql: ${TABLE}."_FIVETRAN_ID" ;;
@@ -37,8 +39,9 @@ view: googleanalytics_test_1_adwordscampaign {
   }
 
   dimension: bounce_rate {
+    sql: nullifzero(${TABLE}."BOUNCE_RATE")/100  ;;
+    value_format_name: percent_1
     type: number
-    sql: ${TABLE}."BOUNCE_RATE" ;;
   }
 
   dimension: cpc {
@@ -46,7 +49,7 @@ view: googleanalytics_test_1_adwordscampaign {
     sql: ${TABLE}."CPC" ;;
   }
 
-  dimension_group: date {
+  dimension_group: event {
     type: time
     timeframes: [
       raw,
@@ -90,6 +93,37 @@ view: googleanalytics_test_1_adwordscampaign {
     type: number
     sql: ${TABLE}."USERS" ;;
   }
+
+  # ========= MEASURES ============
+
+  # measure: total_cost {
+  #   type: sum
+  #   sql: ${ad_cost} ;;
+  #   value_format_name: usd
+  # }
+
+  # measure: average_cost{
+  #   type: average
+  #   sql: ${ad_cost} ;;
+  #   value_format_name: usd
+  # }
+
+  # measure: total_cpc {
+  #   type: sum
+  #   sql: ${cpc} ;;
+  #   value_format_name: usd
+  # }
+
+  # measure: average_cpc {
+  #   type: average
+  #   sql: ${cpc} ;;
+  #   value_format_name: usd
+  # }
+
+  # measure: total_sessions {
+  #   type: sum
+  #   sql: ${sessions} ;;
+  # }
 
   measure: count {
     type: count
