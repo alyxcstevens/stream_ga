@@ -45,6 +45,7 @@ view: googleanalytics_test_1_adwordscampaign {
   }
 
   dimension: cpc {
+    description: "Cost per Click"
     type: number
     sql: ${TABLE}."CPC" ;;
   }
@@ -54,6 +55,10 @@ view: googleanalytics_test_1_adwordscampaign {
     timeframes: [
       raw,
       date,
+      day_of_week,
+      month_name,
+      hour_of_day,
+      week_of_year,
       week,
       month,
       quarter,
@@ -96,34 +101,44 @@ view: googleanalytics_test_1_adwordscampaign {
 
   # ========= MEASURES ============
 
-  # measure: total_cost {
-  #   type: sum
-  #   sql: ${ad_cost} ;;
-  #   value_format_name: usd
-  # }
+  measure: total_clicks {
+    type: sum
+    sql: ${ad_clicks} ;;
+  }
 
-  # measure: average_cost{
-  #   type: average
-  #   sql: ${ad_cost} ;;
-  #   value_format_name: usd
-  # }
+  measure: average_clicks {
+    type: average
+    sql: ${ad_clicks} ;;
+  }
 
-  # measure: total_cpc {
-  #   type: sum
-  #   sql: ${cpc} ;;
-  #   value_format_name: usd
-  # }
+  measure: total_cost {
+    type: sum
+    sql: ${ad_cost} ;;
+    value_format_name: usd
+  }
 
-  # measure: average_cpc {
-  #   type: average
-  #   sql: ${cpc} ;;
-  #   value_format_name: usd
-  # }
+  measure: average_cost{
+    type: average
+    sql: ${ad_cost} ;;
+    value_format_name: usd
+  }
 
-  # measure: total_sessions {
-  #   type: sum
-  #   sql: ${sessions} ;;
-  # }
+  measure: total_cpc {
+    type: sum
+    sql: ${cpc} ;;
+    value_format_name: usd
+  }
+
+  measure: average_cpc {
+    type: average
+    sql: ${cpc} ;;
+    value_format_name: usd
+  }
+
+  measure: total_sessions {
+    type: sum
+    sql: ${sessions} ;;
+  }
 
   measure: count {
     type: count
