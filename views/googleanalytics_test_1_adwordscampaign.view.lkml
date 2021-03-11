@@ -36,6 +36,11 @@ view: googleanalytics_test_1_adwordscampaign {
   dimension: adwords_campaign_id {
     type: string
     sql: ${TABLE}."ADWORDS_CAMPAIGN_ID" ;;
+    link: {
+      label: "Campaign Performance Dashboard"
+      icon_url: "https://www.kindpng.com/picc/m/219-2196962_google-ads-logo-png-transparent-png.png"
+      url: "/dashboards-next/10?Adwords+Campaign+ID={{ value}}"
+    }
   }
 
   dimension: bounce_rate {
@@ -75,8 +80,15 @@ view: googleanalytics_test_1_adwordscampaign {
   }
 
   dimension: goal_conversion_rate_all {
+    hidden: yes
     type: number
     sql: ${TABLE}."GOAL_CONVERSION_RATE_ALL" ;;
+  }
+
+  measure: conversion_rate {
+    type: average
+    sql: ${goal_conversion_rate_all}/100 ;;
+    value_format_name: percent_2
   }
 
   dimension: goal_value_all {
@@ -115,6 +127,7 @@ view: googleanalytics_test_1_adwordscampaign {
     type: sum
     sql: ${ad_cost} ;;
     value_format_name: usd
+    drill_fields: [adwords_campaign_id, event_month, total_cost]
   }
 
   measure: average_cost{
